@@ -3,7 +3,10 @@ package com.globallogic.app;
 public class ControlDeFlujosIf {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	
+		//ejercicio 4.1
+		
 		int a = 3;
 		int b = 10;
 		
@@ -13,7 +16,7 @@ public class ControlDeFlujosIf {
 		}else {
 			System.out.println("La suma de los numeros es mayor a 10");
 		}
-		
+		//ejercicio 4.2
 		String letra = "A";
 		
 		
@@ -35,6 +38,30 @@ public class ControlDeFlujosIf {
 			System.out.println("Es una letra Minuscula");
 			
 		}
+		//ejercicio 4.3
+		
+		int compra = 400;
+		
+		
+		if(compra == 300 || compra < 350 ){
+		int descuento = (compra*20)/100;
+		System.out.println("El desuento es de:" + " " + descuento );
+		}if (compra > 350) { 
+			int descuento = (compra*25)/100;
+			System.out.println("El desuento es de:" + " " + descuento );
+		}else {
+			System.out.println("Sin descuentos, el total es:" + " " + compra);
+		}
+		
+		
+		
+	
+		
+		
+		
+			  
+		
+		
 		
 	}
 
