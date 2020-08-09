@@ -3,6 +3,7 @@
  */
 package mockito.example.services.impl;
 
+import mockito.example.exceptions.ZeroDivisionException;
 import mockito.example.services.BasicOperationsService;
 import mockito.example.services.CalculatorService;
 import mockito.example.services.DataService;
@@ -16,7 +17,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 	
 	public DataService getDataService() {
+		
 		return this.dataService;
+	}
+	
+	public void setBasicOperationsService(BasicOperationsService basicOperationsService) {
+		this.basicOperationsService = basicOperationsService;
 	}
 
 	@Override
@@ -30,8 +36,11 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 	
 	@Override
-	public double calculateDivision(int a, int b) {
-		return basicOperationsService.divide(a, b);		
+	public double calculateDivision(int a, int b)throws ZeroDivisionException {
+		if (b == 0) {
+			throw new ZeroDivisionException();
+		}
+		return basicOperationsService.divide(a, b);	
 	}
 
 	@Override
@@ -50,9 +59,8 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 
 	@Override
-	public boolean isOdd(int a) {
-		// TODO implement me
-		return false;
+	public boolean isEven(int a) {
+		return (a % 2 == 0.0);
 	}
 
 	@Override
@@ -60,6 +68,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 		String textToDisplay = "El resultado es: " + result;
 		System.out.print(textToDisplay);
 		return textToDisplay;
+	}
+
+	@Override
+	public boolean isOdd(int a) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

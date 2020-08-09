@@ -41,7 +41,7 @@ class VehicleCrashTest {
 		crashTest.crash(vehicleMock);
 		double expected=125;
 		assertEquals(expected, crashTest.getTotalEnergy());
-		
+		assertEquals(1, crashTest.getTotalVehicles());
 	
 	}
 	

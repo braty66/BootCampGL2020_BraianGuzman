@@ -12,6 +12,6 @@ public class CartonGenerator{
 	}
 
 	public boolean isGanador() {
-		return rand.nextInt(2) == 1;
+		return rand.nextInt() == 1;
 	}	
 }

@@ -1,11 +1,8 @@
 package coverage.loteria;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mockitoSession;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.Random;
 
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,53 +19,36 @@ public class TestLoteriaMocks {
 	
 	@Mock CartonGenerator cartonGeneratorMock ;
 	
-	Loteria loteria;
-	
-	private static final float POZO = 1500;
-	
-	
-
 	@Test
-	public void testGetLoteria() {
-		loteria= new Loteria(POZO,2,cartonGeneratorMock);
-		assertEquals(POZO, loteria.getPozo());
-	}
-	@Test 
-	public void testGetBoletos() {
-		loteria= new Loteria(POZO,2,cartonGeneratorMock);
-		assertEquals(2, loteria.getBoletos());
-	}
-	@Test 
-	public void testGetGanadores() {
+	void WhenJugadaPreparadaThenOK() {
 		
-		loteria= new Loteria(POZO,1,cartonGeneratorMock);
+		Mockito.when(cartonGeneratorMock.isGanador()).thenReturn(true,false);
 		
+		Loteria loteria = new Loteria(100, 1000, cartonGeneratorMock);
 		loteria.jugada();
-		assertEquals(1, loteria.getGanadores());
 		
+		assertTrue(loteria.hayGanadorUnico());   
+		assertFalse(loteria.hayCuadrupleGanador()); 
 	}
+	
+	@InjectMocks
+	CartonGenerator cartonGeneratorInjectMock;
+	
+	@Mock
+	Random rand;
+	
 	@Test
-	public void testHayGanadorUnico(){
-		loteria= new Loteria(POZO,1,cartonGeneratorMock);
-	  
-		assertTrue(loteria.hayGanadorUnico());
+	void WhenJugadaExcepcionalThenOK() {
 		
-	
-	
-	
-	
-	}
-	
-
-	@Test
-	public void testHayCuadrupleGanador() {
 		
-		Loteria loteria2= new Loteria(POZO,4,cartonGeneratorMock);
+		Mockito.when(rand.nextInt()).thenReturn(1,1,1,1,0);
 		
-	loteria2.jugada();
-	assertTrue(loteria2.hayCuadrupleGanador());
+		Loteria loteria = new Loteria(100, 1000, cartonGeneratorInjectMock);
+		loteria.jugada();
 		
-	}
+		assertFalse(loteria.hayGanadorUnico());   
+		assertTrue(loteria.hayCuadrupleGanador()); 
+	}	
 	
 	
 
